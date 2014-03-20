@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1395335475 source:c:\projects\yo\yo\main.cpp
+1395351189 source:c:\projects\yo\yo\main.cpp
 	"common.h"
 	"app.h"
 
@@ -24,14 +24,17 @@
 	<string.h>
 	<GL/freeglut.h>
 
-1395331458 c:\projects\yo\yo\app.h
+1395348193 c:\projects\yo\yo\app.h
 	"common.h"
 
-1395333102 c:\projects\yo\yo\common.h
+1395350674 c:\projects\yo\yo\common.h
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	<stdint.h>
+	<cerrno>
+	<string>
+	<iostream>
 	<GL/glew.h>
 	<GL/freeglut.h>
 
@@ -43,8 +46,10 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1395336891 source:c:\projects\yo\yo\app.cpp
+1395351313 source:c:\projects\yo\yo\app.cpp
 	"app.h"
+	<fstream>
+	<vector>
 
 1374498682 c:\projects\yo\yo\glew-1.10.0\include\gl\glew.h
 	<stddef.h>
@@ -75,4 +80,22 @@
 	<X11/Xutil.h>
 	<X11/Xmd.h>
 	<GL/glew.h>
+
+1368272960 c:\projects\yo\yo\freeglut\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1368272960 c:\projects\yo\yo\freeglut\include\gl\freeglut_std.h
+	<windows.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1368272960 c:\projects\yo\yo\freeglut\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1395350852 source:c:\projects\yo\yo\common.cpp
+	"common.h"
 

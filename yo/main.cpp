@@ -12,11 +12,12 @@ void Initialize(int, char*[]);
 void InitWindow(int, char*[]);
 void ResizeFunction(int, int);
 void RenderFunction(void);
+void KeyboardSpecialFunction( int key, int x, int y );
+void KeyboardFunction( unsigned char key, int x, int y );
 
 App app;
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]){
 	Initialize(argc, argv);
 
 	glutMainLoop();
@@ -24,30 +25,27 @@ int main(int argc, char* argv[])
 	exit(EXIT_SUCCESS);
 }
 
-void Initialize(int argc, char* argv[])
-{
+void Initialize(int argc, char* argv[]){
 	InitWindow(argc, argv);
 
-	fprintf(
-		stdout,
-		"INFO: OpenGL Version: %s\n",
-		glGetString(GL_VERSION)
-	);
+	fprintf(stdout,"INFO: OpenGL Version: %s\n",glGetString(GL_VERSION));
 
     GLenum err = glewInit();
-    if (GLEW_OK != err)
-    {
+    if (GLEW_OK != err){
         /* Problem: glewInit failed, something is seriously wrong. */
         fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
         exit(1);
     }
     fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
+    // Clear all GL errors (bug in glew).
+    // see: https://www.opengl.org/wiki/OpenGL_Loading_Library#GLEW
+    while(glGetError() != GL_NO_ERROR);
+
     app.init();
 }
 
-void InitWindow(int argc, char* argv[])
-{
+void InitWindow(int argc, char* argv[]){
 	glutInit(&argc, argv);
 
 	glutInitContextVersion(4, 0);
@@ -66,26 +64,34 @@ void InitWindow(int argc, char* argv[])
 	WindowHandle = glutCreateWindow(WINDOW_TITLE_PREFIX);
 
 	if(WindowHandle < 1) {
-		fprintf(
-			stderr,
-			"ERROR: Could not create a new rendering window.\n"
-		);
+		fprintf(stderr,"ERROR: Could not create a new rendering window.\n");
 		exit(EXIT_FAILURE);
 	}
 
 	glutReshapeFunc(ResizeFunction);
 	glutDisplayFunc(RenderFunction);
+    glutSpecialFunc(KeyboardSpecialFunction);
+    glutKeyboardFunc(KeyboardFunction);
 }
 
-void ResizeFunction(int Width, int Height)
-{
+void KeyboardSpecialFunction( int key, int x, int y ){
+    // TODO
+}
+
+void KeyboardFunction( unsigned char key, int x, int y ){
+    if ( key == 27 ){
+        app.destroy();
+        exit(0);
+    }
+}
+
+void ResizeFunction(int Width, int Height){
 	CurrentWidth = Width;
 	CurrentHeight = Height;
 	glViewport(0, 0, CurrentWidth, CurrentHeight);
 }
 
-void RenderFunction(void)
-{
+void RenderFunction(void){
 	app.render();
 	glutSwapBuffers();
 	glutPostRedisplay();
