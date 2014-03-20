@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1395351189 source:c:\projects\yo\yo\main.cpp
+1395352508 source:c:\projects\yo\yo\main.cpp
 	"common.h"
 	"app.h"
 
@@ -24,7 +24,7 @@
 	<string.h>
 	<GL/freeglut.h>
 
-1395348193 c:\projects\yo\yo\app.h
+1395354276 c:\projects\yo\yo\app.h
 	"common.h"
 
 1395350674 c:\projects\yo\yo\common.h
@@ -46,7 +46,7 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1395351313 source:c:\projects\yo\yo\app.cpp
+1395354677 source:c:\projects\yo\yo\app.cpp
 	"app.h"
 	<fstream>
 	<vector>
@@ -96,6 +96,6 @@
 1368272960 c:\projects\yo\yo\freeglut\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1395350852 source:c:\projects\yo\yo\common.cpp
+1395352485 source:c:\projects\yo\yo\common.cpp
 	"common.h"
 

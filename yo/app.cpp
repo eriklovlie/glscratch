@@ -10,8 +10,8 @@ App::~App(){
 }
 
 void App::init(){
-    init_vbo();
     init_prog();
+    init_vbo();
 }
 
 void App::destroy(){
@@ -20,26 +20,35 @@ void App::destroy(){
 
 void App::render(){
     glClearColor(0.1, 0.1, 0.1, 0.1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glUseProgram(prog);
+    glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 void App::init_vbo(){
     check_gl_error();
+
+    glUseProgram(prog);
+    pos_attr = glGetAttribLocation(prog, "in_Position");
+
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
     float vertices[] = {
-          0.0, 1.0, 0.0,
-         -1.0, -1.0, 0.0,
-          1.0, -1.0, 0.0
+          0.0f, 1.0f, 0.0f, 1.0f,
+         -1.0f, -1.0f, 0.0f, 1.0f,
+          1.0f, -1.0f, 0.0f, 1.0f,
     };
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    check_gl_error();
-    glVertexAttribPointer(pos_attr, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    check_gl_error();
+
+    glVertexAttribPointer(pos_attr, 4, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(pos_attr);
+
+    check_gl_error();
 }
 
 void App::init_prog(){

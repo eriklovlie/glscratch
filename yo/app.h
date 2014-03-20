@@ -18,7 +18,8 @@ private:
     uint32_t compile_shader( const char * path, GLenum shader_type );
     uint32_t load_prog( const char * vert_path, const char * frag_path );
 
+    uint32_t vao;
     uint32_t vbo;
     uint32_t prog;
-    static const uint32_t pos_attr = 0;
+    uint32_t pos_attr;
 };

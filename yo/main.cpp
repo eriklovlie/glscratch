@@ -30,6 +30,9 @@ void Initialize(int argc, char* argv[]){
 
 	fprintf(stdout,"INFO: OpenGL Version: %s\n",glGetString(GL_VERSION));
 
+    // Workaround for glew bug.
+    // see: https://www.opengl.org/wiki/OpenGL_Loading_Library#GLEW
+    glewExperimental = GL_TRUE;
     GLenum err = glewInit();
     if (GLEW_OK != err){
         /* Problem: glewInit failed, something is seriously wrong. */
