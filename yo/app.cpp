@@ -23,13 +23,12 @@ void App::render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glUseProgram(prog);
     glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_LINES_ADJACENCY, 0, 6);
 }
 
 void App::init_vbo(){
     check_gl_error();
 
-    glUseProgram(prog);
     pos_attr = glGetAttribLocation(prog, "in_Position");
 
     glGenVertexArrays(1, &vao);
@@ -38,10 +37,18 @@ void App::init_vbo(){
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
+    float a = 0.4f;
+    float w = 1.0f;
+
     float vertices[] = {
-          0.0f, 1.0f, 0.0f, 1.0f,
-         -1.0f, -1.0f, 0.0f, 1.0f,
-          1.0f, -1.0f, 0.0f, 1.0f,
+        -a, +a, 0, w,
+        +a, +a, 0, w,
+
+        -a, 0, 0, w,
+        +a, 0, 0, w,
+
+        -a, -a, 0, w,
+        +a, -a, 0, w,
     };
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 

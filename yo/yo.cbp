@@ -13,16 +13,15 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="C:/projects/freeglut/include" />
+					<Add option="-DGLEW_STATIC" />
+					<Add directory="freeglut/include" />
 					<Add directory="glew-1.10.0/include" />
 				</Compiler>
 				<Linker>
 					<Add library="libfreeglut.a" />
 					<Add library="opengl32" />
-					<Add directory="C:/projects/freeglut/lib" />
-					<Add directory="C:/projects/freeglut/bin" />
-					<Add directory="C:/projects/glew-1.10.0/lib/Release/Win32" />
-					<Add directory="C:/projects/glew-1.10.0/bin/Release/Win32" />
+					<Add directory="freeglut/lib" />
+					<Add directory="freeglut/bin" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -41,9 +40,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="freeglut/include" />
 		</Compiler>
+		<Linker>
+			<Add library="libfreeglut.a" />
+			<Add library="opengl32" />
+		</Linker>
 		<Unit filename="app.cpp" />
 		<Unit filename="app.h" />
+		<Unit filename="common.cpp" />
 		<Unit filename="common.h" />
 		<Unit filename="glew-1.10.0/src/glew.c">
 			<Option compilerVar="CC" />

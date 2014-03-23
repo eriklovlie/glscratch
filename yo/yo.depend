@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1395352508 source:c:\projects\yo\yo\main.cpp
+1395354753 source:c:\projects\yo\yo\main.cpp
 	"common.h"
 	"app.h"
 
@@ -97,5 +97,76 @@
 	<stdarg.h>
 
 1395352485 source:c:\projects\yo\yo\common.cpp
+	"common.h"
+
+1395606911 source:c:\projects\opengl\yo\yo\app.cpp
+	"app.h"
+	<fstream>
+	<vector>
+
+1395354276 c:\projects\opengl\yo\yo\app.h
+	"common.h"
+
+1395350674 c:\projects\opengl\yo\yo\common.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+	<cerrno>
+	<string>
+	<iostream>
+	<GL/glew.h>
+	<GL/freeglut.h>
+
+1374502282 c:\projects\opengl\yo\yo\glew-1.10.0\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1374502282 source:c:\projects\opengl\yo\yo\glew-1.10.0\src\glew.c
+	<GL/glew.h>
+	<GL/wglew.h>
+	<GL/glxew.h>
+	<dlfcn.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+	<string.h>
+	<AvailabilityMacros.h>
+	<dlfcn.h>
+	<mach-o/dyld.h>
+
+1374502282 c:\projects\opengl\yo\yo\glew-1.10.0\include\gl\wglew.h
+	<windows.h>
+
+1374502282 c:\projects\opengl\yo\yo\glew-1.10.0\include\gl\glxew.h
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xmd.h>
+	<GL/glew.h>
+
+1395521259 source:c:\projects\opengl\yo\yo\main.cpp
+	"common.h"
+	"app.h"
+
+1368276560 c:\projects\opengl\yo\yo\freeglut\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1368276560 c:\projects\opengl\yo\yo\freeglut\include\gl\freeglut_std.h
+	<windows.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1368276560 c:\projects\opengl\yo\yo\freeglut\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1395352485 source:c:\projects\opengl\yo\yo\common.cpp
 	"common.h"
 

@@ -8,6 +8,9 @@ out vec4 fragColor;
 
 void main()
 {
-    fragColor = vec4(1.0,1.0,1.0,1.0); //Set colour of each fragment to WHITE
+//	float col = float(gl_PrimitiveID % 8 + 1) / 8.0;
+//    fragColor = vec4(col, col, 0.9, 1.0);
+
+    fragColor = vec4(1.0, 1.0, 1.0, 1.0);
 }
 /*--------------------------------------------------------------*/
