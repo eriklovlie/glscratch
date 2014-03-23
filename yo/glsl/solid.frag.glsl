@@ -1,6 +1,6 @@
 /*---------------- "exampleFragmentShader.frag" ----------------*/
 
-#version 150 // Specify which version of GLSL we are using.
+#version 400
 
 precision highp float; // Video card drivers require this line to function properly
 

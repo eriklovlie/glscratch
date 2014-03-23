@@ -99,12 +99,12 @@
 1395352485 source:c:\projects\yo\yo\common.cpp
 	"common.h"
 
-1395606911 source:c:\projects\opengl\yo\yo\app.cpp
+1395609520 source:c:\projects\opengl\yo\yo\app.cpp
 	"app.h"
 	<fstream>
 	<vector>
 
-1395354276 c:\projects\opengl\yo\yo\app.h
+1395607890 c:\projects\opengl\yo\yo\app.h
 	"common.h"
 
 1395350674 c:\projects\opengl\yo\yo\common.h

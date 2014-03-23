@@ -23,7 +23,7 @@ void App::render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glUseProgram(prog);
     glBindVertexArray(vao);
-    glDrawArrays(GL_LINES_ADJACENCY, 0, 6);
+    glDrawArrays(GL_LINES_ADJACENCY, 0, 6 * 2);
 }
 
 void App::init_vbo(){
@@ -41,14 +41,20 @@ void App::init_vbo(){
     float w = 1.0f;
 
     float vertices[] = {
-        -a, +a, 0, w,
-        +a, +a, 0, w,
+        -a, +a, 0, w,  // 0 - adjacent 0
+        -a, +a, 0, w,  // 1 - leading
+        +a, +a, 0, w,  // 2
+        -a, 0, 0, w,   // 3 - adjacent
 
-        -a, 0, 0, w,
-        +a, 0, 0, w,
+        +a, +a, 0, w,  // 0 - adjacent
+        -a, 0, 0, w,   // 1 - leading
+        +a, 0, 0, w,   // 2
+        -a, -a, 0, w,  // 3 - adjacent
 
-        -a, -a, 0, w,
-        +a, -a, 0, w,
+        +a, 0, 0, w,   // 0 - adjacent
+        -a, -a, 0, w,  // 1 - leading
+        +a, -a, 0, w,  // 2
+        +a, -a, 0, w,  // 3 - adjacent
     };
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
@@ -59,15 +65,17 @@ void App::init_vbo(){
 }
 
 void App::init_prog(){
-    prog = load_prog("glsl/solid.vert.glsl", "glsl/solid.frag.glsl");
+    prog = load_prog("glsl/solid.vert.glsl", "glsl/solid.geom.glsl", "glsl/solid.frag.glsl");
 }
 
-uint32_t App::load_prog( const char * vert_path, const char * frag_path ){
+uint32_t App::load_prog( const char * vert_path, const char * geom_path, const char * frag_path ){
     uint32_t vert = compile_shader( vert_path, GL_VERTEX_SHADER );
+    uint32_t geom = compile_shader( geom_path, GL_GEOMETRY_SHADER );
     uint32_t frag = compile_shader( frag_path, GL_FRAGMENT_SHADER );
 
     uint32_t prog = glCreateProgram();
     glAttachShader(prog, vert);
+    glAttachShader(prog, geom);
     glAttachShader(prog, frag);
     glLinkProgram(prog);
 
@@ -94,6 +102,7 @@ uint32_t App::load_prog( const char * vert_path, const char * frag_path ){
 
     //Always detach shaders after a successful link.
     glDetachShader(prog, vert);
+    glDetachShader(prog, geom);
     glDetachShader(prog, frag);
     return prog;
 }
@@ -104,21 +113,26 @@ uint32_t App::compile_shader( const char * path, uint32_t shader_type ){
     const char * text_ptr = shader_text.c_str();
     glShaderSource(shader, 1, (const GLchar**)&text_ptr, 0);
     glCompileShader(shader);
+
+    GLint maxLength = 0;
+    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+
+    std::vector<char> errorLog(maxLength);
+    glGetShaderInfoLog(shader, maxLength, &maxLength, &errorLog[0]);
+
+    std::cerr << "Shader compilation log ---------------" << std::endl;
+    std::cerr << "Shader path: " << path << std::endl;
+    std::cerr << "Error log: " << (char*)&errorLog[0] << std::endl;
+
     GLint success = 0;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+
     if ( success == GL_FALSE ){
-        GLint maxLength = 0;
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
-
-        std::vector<char> errorLog(maxLength);
-        glGetShaderInfoLog(shader, maxLength, &maxLength, &errorLog[0]);
-
-        glDeleteShader(shader);
-
         std::cerr << "Compilation of shader failed." << std::endl;
-        std::cerr << "Shader path: " << path << std::endl;
-        std::cerr << "Error log: " << (char*)&errorLog[0] << std::endl;
+        glDeleteShader(shader);
         exit(1);
+    }else{
+        std::cerr << "Compilation succeeded." << std::endl;
     }
     return shader;
 }

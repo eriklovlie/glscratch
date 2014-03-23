@@ -1,6 +1,6 @@
 /*----------------- "exampleVertexShader.vert" -----------------*/
 
-#version 150 // Specify which version of GLSL we are using.
+#version 400
 
 // in_Position was bound to attribute index 0("shaderAttribute")
 in  vec3 in_Position;
